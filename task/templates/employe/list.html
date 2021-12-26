@@ -1,0 +1,73 @@
+{% extends "base.html"%}
+{%load static %}
+
+{% block content %}
+
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+        padding: 5px;
+    }
+
+    a {
+        color: black;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #23a0a0;
+
+    }
+</style>
+
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <table>
+                    <tr>
+                        <th>
+                            Employe code
+                        </th>
+                        <th>
+                            Employe name
+                        </th>
+                        <th>
+                            Employe deparment
+                        </th>
+                    </tr>
+                    {% for list in list %}
+                    <tr>
+                        <td><a href="{% url 'empl_detail' list.id %}"> {{ list.emp_code }} </td>
+
+                        <td>
+
+                            {{ list.emp_name }}
+
+                        </td>
+                        <td>
+
+                            {{ list.epm_deparment }}
+
+                        </td>
+                    </tr>
+                    {% endfor%}
+                </table>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

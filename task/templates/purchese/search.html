@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+        padding: 5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: red;
+    }
+
+    .tab {
+        margin: 20px;
+        padding-left: 60px;
+    }
+
+    .search {
+        margin-top: 40px;
+        padding-left: 61px;
+    }
+
+    .row {
+        padding-left: 58px;
+        margin: 2px;
+    }
+
+    .form-group {
+        padding: 5px;
+        margin: 2px;
+    }
+
+    .btn {
+        margin: 4px;
+        padding: 4px;
+    }
+
+    .try {
+        color: #ce2610;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .yellow {
+        color: rgb(158, 158, 17);
+    }
+</style>
+
+
+
+
+<h1> Report that you need </h1>
+<div class="tab">
+    <table>
+        <tr>
+            <th>To</th>
+            <th>Given By</th>
+
+            <th>discription</th>
+            <th>Remark</th>
+            <th>Date</th>
+            <th>reporting date</th>
+            <th>status</th>
+            <th>Department</th>
+        </tr>
+        <tr class="div">
+            {% for task in data %}
+
+            <td><a href="{% url 'purchsedep-detail' task.id %}"> {{task.first_name}} </td>
+
+            <td> {{task.created_by}} </td>
+
+            <td> {{task.discription}} </td>
+
+
+
+            <td> {{task.ramark}} </td>
+
+            <td> {{task.date}} </td>
+
+            <td class="date"> {{task.repoting_data}} </td>
+
+
+            <td> {{task.status}} </td>
+
+            <td> {{task.deaprtment}} </td>
+        </tr>
+        {% endfor %}
+
+
+    </table>
+
+</div>
+
+{% endblock %}

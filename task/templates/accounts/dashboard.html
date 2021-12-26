@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<body>
+
+  {% if user.is_staff%}
+
+  <a href="{% url 'list' %}"><button class="btn btn-success">Emp list</button></a>
+
+
+
+  <section>
+    <div class="form mt-5 pt-5 text-center">
+      <h1 class="p-2 m-2">Assing New Employee</h1>
+      <form method="POST" action="{% url 'employe' %}">
+        {% csrf_token %}
+        <div class="container">
+          <div class="row">
+            <div class="col">
+              <input name="emp_code" type="text" placeholder="employee code" required>
+            </div>
+            <div class="col">
+              <input name="emp_name" type="text" placeholder="employee name" required>
+            </div>
+
+            <div class="col">
+              <input name="epm_deparment" type="text" placeholder="employee deparment" required>
+            </div>
+            <div class="col">
+              <input type="submit" class="btn btn-outline-danger btn-sm button" value="Add">
+            </div>
+
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </section>
+  {% else %}
+
+  <h1> you are not authorised</h1>
+  {% endif%}
+
+</body>
+
+
+{% endblock %}

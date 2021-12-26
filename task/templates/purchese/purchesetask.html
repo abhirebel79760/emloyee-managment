@@ -1,0 +1,79 @@
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+    }
+</style>
+<nav class="navbar  navbar-dark bg-dark">
+    <a class="navbar-brand" href="{% url 'purchase-task'%}">Purchase task</a>
+</nav>
+
+<section class="searchbox container mt-5 p-3 bg-accent">
+    <form action="{% url 'purchase-task' %}" method="GET">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <select name="keyword" id="inputState" class="form-control">
+                    <option selected disabled hidden>Givento</option>
+                    {% for haii in to %}
+                    <option value="{{haii}}">{{haii}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <select name="keyword1" id="inputState" class="form-control">
+                    <option selected disabled hidden>Given by</option>
+                    {% for Given in given_by %}
+                    <option value="{{Given}}">{{Given}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <select name="keyword2" id="inputState" class="form-control">
+                    <option selected disabled hidden>Reporting date</option>
+                    {% for hello in last_date %}
+                    <option value="{{hello}}">{{hello}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-light">Search</button>
+        </div>
+
+    </form>
+
+</section>
+<div>
+    {% for task in data %}
+    <a href="{% url 'purchsedep-detail' task.id %}" <h1>More info..</h1>
+        <table>
+
+            <tr>
+                <th>Given By</th>
+                <td>{{task.created_by}}</td>
+                <th>To</th>
+                <td> {{task.first_name}} </td>
+                <th>discription</th>
+                <td> {{task.discription}} </td>
+            </tr>
+            <tr>
+                <th>Remark</th>
+                <td> {{task.ramark}} </td>
+                <th>Date</th>
+                <td> {{task.date}} </td>
+                <th>reporting date</th>
+                <td> {{task.repoting_data}} </td>
+            </tr>
+            <tr>
+                <th>status</th>
+                <td> {{task.status}} </td>
+            </tr>
+
+
+
+        </table>
+        {% endfor %}
+</div>

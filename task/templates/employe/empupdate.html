@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<h1> this page is for the updation</h1>
+
+<form action="" method="POST" class="form">
+    {% csrf_token %}
+
+    {{ form.emp_name }}
+    {{ form.emp_code }}
+    {{ form.epm_deparment }}
+    <section class="text-center">
+        <input type="submit" value="Update" class="btn btn-warning submit">
+    </section>
+</form>
+
+
+{% endblock %}

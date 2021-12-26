@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+	.submit {
+		margin: 3em;
+	}
+
+	.upadate {
+		margin: 2em;
+	}
+</style>
+
+
+
+<h4>You want to update:<span class="created visually-hidden ">{{tuber.created_by}}</span><br><span
+		class="assing visually-hidden ">{{user.username}}</span></h4>
+
+
+
+<form action="" method="POST" class="form">
+	{% csrf_token %}
+	<section>
+		<div class="container">
+			<div class="row aling-items-left">
+				<div class="col">
+					<label for="">Remark</label>
+					{{ form.ramark }}
+				</div>
+				<div class="col">
+					<label for="">Status</label>
+					{{ form.status }}
+				</div>
+				<div class="col">
+					<label for="update">Upadate on:</label>
+
+					{{ form.submision_date }}
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="upadate">
+		<div class="container">
+			<div class="row aling-items-left">
+				<div class="col  haii">
+					<label for="">Checked</label>
+					{{ form.checked }}
+				</div>
+				<div class="col">
+					{{ form.created_by }}
+				</div>
+				<div class="col">
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="text-center">
+		<input type="submit" value="Update" class="btn btn-warning submit">
+	</section>
+</form>
+
+
+<script>
+	var creator = document.querySelector(".created")
+
+	let text = creator.innerText
+
+	console.log(text)
+
+	const disable = document.querySelector(".haii")
+
+	const assing = document.querySelector(".assing")
+
+	let assingText = assing.innerText
+	console.log(assingText)
+
+
+
+	if (text === assingText) {
+
+	} else {
+		disable.classList.toggle("visually-hidden")
+	}
+
+
+
+
+
+</script>
+
+
+
+
+
+
+{% endblock %}

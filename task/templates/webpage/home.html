@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>homepage</title>
+    <main>
+
+
+        <style>
+            table,
+            th,
+            td {
+                border: 1px solid black;
+                margin: 5px;
+                position: center;
+            }
+
+            a {
+                color: rgb(57, 38, 226);
+                text-decoration: none;
+            }
+
+            a:hover {
+                color: red;
+            }
+
+            .submit {
+                margin-right: 185px;
+            }
+
+            h1 {
+                margin-right: 4em;
+            }
+        </style>
+
+<body class="bg-light">
+    <section>
+        <div class="bg-accent">
+            <form method="GET" action="{% url 'search' %}">
+                <h1 class="text-center tex p-2">List of employees</h1>
+                <div class="row">
+                    <div class="col-md-4 offset-md-4">
+                        {% include 'messages.html' %}
+                    </div>
+                    {% for list in data %}
+                    <div class="container">
+                        <div class="row">
+                            <div class="col">
+                                <input class="form-check-input" type="radio" name="keyword" value={{list.emp_name}}
+                                    id="flexCheckDefault">
+                                <label class="form-check-label" for="flexCheckDefault">
+                                    {{list.emp_code}}
+                                </label>
+                            </div>
+                            <div class="col">
+                                {{list.emp_name}}
+                            </div>
+                            <div class="col">
+                                {{list.epm_deparment}}
+                            </div>
+                            {% endfor%}
+                            <div class="row">
+                                <div class="col text-center">
+                                    <button type="submit" class="btn submit btn-primary ">Report</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </form>
+
+        </div>
+
+    </section>
+
+</body>
+{% endblock %}
+
+</html>

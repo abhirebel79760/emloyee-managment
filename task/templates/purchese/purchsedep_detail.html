@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+        padding: 5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: red;
+    }
+
+    .tab {
+        margin-top: 45px;
+        padding-left: 60px;
+    }
+
+    .search {
+        margin-top: 40px;
+        padding-left: 61px;
+    }
+
+    .row {
+        padding-left: 58px;
+        margin: 2px;
+    }
+
+    .form-group {
+        padding: 5px;
+        margin: 2px;
+    }
+
+    .btn {
+        margin: 4px;
+        padding: 4px;
+    }
+
+    .try {
+        color: #ce2610;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .yellow {
+        color: rgb(158, 158, 17);
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>detail</title>
+
+
+
+</head>
+
+<body>
+    <h4>You want to update:<span class="created visually-hidden ">{{tuber.created_by}}</span><br><span
+            class="user visually-hidden">{{user.username}}</span></h4>
+    <section>
+        <div class="container">
+
+            <div class="row">
+                <div class="col">
+                    <div class="hi">
+                        <table>
+                            <tr>
+                                <th>Given By</th>
+                                <th>To</th>
+                                <th>discription</th>
+                                <th>Remark</th>
+                                <th>Date</th>
+                                <th>Reporting Date</th>
+                                <th>status </th>
+                                <th>checked </th>
+                                <th>upadate on </th>
+
+                            </tr>
+                            <tr>
+                                <td class="assing">{{data.created_by}}</td>
+                                <td> {{data.first_name}} </td>
+                                <td> {{data.discription}} </td>
+                                <td id="reply"> {{data.ramark}} </td>
+                                <td> {{data.date}} </td>
+                                <td class="date"> {{data.repoting_data}} </td>
+                                <td class="status"> {{data.status}} </td>
+                                <td class="checked"> {{data.checked}} </td>
+                                <td class="update"> {{data.submision_date}} </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="row  align-items-start">
+                <div class="col haii">
+                    <a class="btn btn-success " href="{% url 'update-product' data.id %}">Update</a>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <input type="submit" class="btn btn-outline-danger haii" value="Delete">
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </section>
+
+
+
+
+
+    <script>
+        const td = document.querySelector(".date")
+        const dv = document.querySelector(".hi")
+        const status = document.querySelector(".status")
+        let checked = document.querySelector(".checked")
+        let update = document.querySelector(".update")
+
+        let subDate = update.innerText
+        console.log(subDate)
+        let date = subDate.slice(0, 19)
+        console.log(`after splice ${date}`)
+
+        if (subDate) {
+
+            update.innerText = (date)
+        }
+
+        if (subDate == "False") {
+            update.innerText = "Not update yet"
+        }
+
+
+
+
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        let finalSatus = (status.innerText).toUpperCase()
+
+        let checkedValue = checked.innerText
+
+        let text = td.innerText
+        console.log(text)
+        console.log(finalSatus)
+        console.log(checkedValue)
+        if (today > text) {
+            if (finalSatus === "COMPLETED" && checkedValue === "True") {
+                dv.classList.toggle('green')
+            } else {
+                dv.classList.toggle('try')
+            }
+
+        } else if (today === text) {
+            dv.classList.toggle('yellow')
+        } else if (today < text) {
+            dv.classList.toggle('green')
+
+        }
+
+        if (checkedValue == "True") {
+            checked.innerText = "Yes"
+        } else if (checkedValue === "False") {
+            checked.innerText = "NO"
+        }
+
+        // it for delete button 
+
+
+        var creator = document.querySelector(".user")
+
+        let usertext = creator.innerText
+
+        console.log(usertext)
+
+        const disable = document.querySelector(".haii")
+
+        const assing = document.querySelector(".assing")
+
+        let assingText = assing.innerText
+        console.log(assingText)
+
+
+
+        if (usertext == assingText) {
+
+        } else {
+            disable.classList.toggle("visually-hidden")
+        }
+
+
+    </script>
+</body>
+
+</html>
+{% endblock %}

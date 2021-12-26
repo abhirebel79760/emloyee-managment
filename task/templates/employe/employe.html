@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+        padding: 5px;
+
+    }
+</style>
+
+
+<section>
+    <div class="row">
+        <div class="col align-items-end">
+
+        </div>
+    </div>
+
+</section>
+
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="col">
+
+
+                    <table>
+                        <tr>
+                            <th>Employe code</th>
+                            <th>Employe name</th>
+                            <th>Employe department</th>
+                        </tr>
+                        <tr>
+                            <td>{{emp_list.emp_code}}</td>
+                            <td>{{emp_list.emp_name}}</td>
+                            <td>{{emp_list.epm_deparment}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col align-items-start">
+                <a class="btn btn-success" href="{% url 'empl_update' emp_list.id %}">update</a>
+            </div>
+            <div class="col text-start">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+{% endblock %}

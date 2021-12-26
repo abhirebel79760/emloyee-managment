@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<style>
+    table,
+    th,
+    td {
+        border: 1px solid black;
+        margin: 5px;
+        position: center;
+        padding: 5px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+
+    a:hover {
+        color: red;
+    }
+
+    .tab {
+        margin: 20px;
+        padding-left: 60px;
+    }
+
+    .search {
+        margin-top: 40px;
+        padding-left: 61px;
+    }
+
+    .row {
+        padding-left: 58px;
+        margin: 2px;
+    }
+
+    .form-group {
+        padding: 5px;
+        margin: 2px;
+    }
+
+    .btn {
+        margin: 4px;
+        padding: 4px;
+    }
+
+    .try {
+        color: #ce2610;
+    }
+
+    .green {
+        color: green;
+    }
+
+    .yellow {
+        color: rgb(158, 158, 17);
+    }
+</style>
+
+
+
+<head>
+    <title>purchese dep</title>
+</head>
+
+<body>
+
+
+    <form method="POST" action="{% url 'purchasetask' %}" class="col-md-8 offset-md-2 bg-accent">
+        <h1 class="pt-2 pb-4 text-center">Assignment</h1>
+        {% csrf_token %}
+        <div class="container">
+            <div class="row align-items-start">
+
+                <div class="col">
+                    <select name="first_name" class="form-control">
+                        <option selected disabled hidden>Assigned to</option>
+                        {% for list in empData %}
+                        <option value="{{list}}">{{list}}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col">
+
+                    <select name="created_by" class="form-control">
+
+                        <option value="{{user.username}}">{{user.username}}</option>
+
+                    </select>
+                </div>
+                <div class="col">
+                    <input name="ramark" class="form-control" placeholder="Remark">
+                </div>
+
+            </div>
+            <div class="row align-items-center">
+                <div class="col">
+                    <select name="deaprtment" class="form-control">
+                        <option selected>Department</option>
+                        {% for dep in empdep%}
+                        <option value="{{dep}}">{{dep}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <div class="col">
+                    <textarea name="discription" class="form-control" rows="3" placeholder="Discription"></textarea>
+                </div>
+                <div class="col">
+                    <input name="repoting_data" type="date" class="form-control" placeholder="date">
+                </div>
+
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+
+            </div>
+        </div>
+    </form>
+    <section class="container mt-5 mb-5">
+
+        <h2>Search</h2>
+        <!-- it for serch box -->
+        <div class="search">
+
+            <section class="searchbox container mt-5">
+                <form action="{% url 'purchase-task' %}" method="GET">
+                    <div class="row">
+                        <span class="form-group col">
+                            <select name="keyword" id="inputState" class="form-control">
+                                <option selected disabled hidden>Assigned to</option>
+                                {% for haii in to %}
+                                <option value="{{haii}}">{{haii}}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                        <span class="form-group col ">
+                            <select name="keyword1" id="inputState" class="form-control" required>
+                                <option selected disabled hidden>Assigned by</option>
+                                {% for Given in given_by %}
+                                <option value="{{Given}}">{{Given}}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                        <span class="form-group col">
+                            <select name="keyword2" id="inputState" class="form-control">
+                                <option selected disabled hidden>Reporting date</option>
+                                {% for hello in last_date %}
+                                <option value="{{hello}}">{{hello}}</option>
+                                {% endfor %}
+                            </select>
+                        </span>
+                        <span>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-light">Search</button>
+                            </div>
+
+                </form>
+
+            </section>
+            <span>
+
+        </div>
+
+        <!-- it for task report -->
+
+
+        <h2> All Task </h2>
+
+        <div class="tab">
+            <table>
+                <tr>
+                    <th>To</th>
+                    <th>Assigned By</th>
+
+                    <th>Discription</th>
+                    <th>Remark</th>
+                    <th>Date</th>
+                    <th>Reporting date</th>
+                    <th>status</th>
+                    <th>Department</th>
+                </tr>
+                <tr class="div">
+                    {% for task in data %}
+
+                    <td><a href="{% url 'purchsedep-detail' task.id %}"> {{task.first_name}} </td>
+
+                    <td> {{task.created_by}} </td>
+
+                    <td> {{task.discription}} </td>
+
+
+
+                    <td> {{task.ramark}} </td>
+
+                    <td> {{task.date}} </td>
+
+                    <td class="date"> {{task.repoting_data}} </td>
+
+
+                    <td> {{task.status}} </td>
+
+                    <td> {{task.deaprtment}} </td>
+                </tr>
+                {% endfor %}
+
+
+            </table>
+
+        </div>
+
+    </section>
+
+    <!-- 
+    <script>
+
+        let td = document.querySelector(".date")
+
+
+        let date = []
+
+
+        const dv = document.querySelector(".div")
+
+
+
+        let today = new Date();
+        const dd = String(today.getDate()).padStart(2, '0');
+        const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        const yyyy = today.getFullYear();
+
+        today = yyyy + '-' + mm + '-' + dd;
+
+        let text = td.innerText
+
+        console.log(text)
+
+        if (today > text) {
+            dv.classList.toggle('try')
+        } else if (today === text) {
+            dv.classList.toggle('yellow')
+        } else if (today < text) {
+            dv.classList.toggle('green')
+        }
+
+
+    </script>
+ -->
+
+</body>
+{% endblock %}
+
+</html>
